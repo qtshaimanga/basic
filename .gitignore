@@ -1,0 +1,15 @@
+#SYSTEM
+.DS_Store
+.git
+
+#MODULES
+node_modules/
+
+#LOGS
+npm-debug.log
+
+#BUILD
+dist/*
+
+#DOCS
+docs/*
