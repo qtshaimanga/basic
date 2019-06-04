@@ -6,6 +6,9 @@ let config = require('./webpack.dev.config')
 let compiler = webpack(config);
 let hotMiddleware = require('webpack-hot-middleware')(compiler);
 
+require('shelljs/global')
+env.NODE_ENV = 'development'
+
 chokidar.watch('./index.html').on('all', () => {
 
   hotMiddleware.publish({ action: "reload" })

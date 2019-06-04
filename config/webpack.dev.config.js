@@ -10,7 +10,7 @@ Object.keys(config.entry).forEach( (name) => {
 
 config.plugins = config.plugins.concat([
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin(),
+  new webpack.NoEmitOnErrorsPlugin(),
   new FriendlyErrors(),
 ]);
 

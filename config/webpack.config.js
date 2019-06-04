@@ -1,9 +1,14 @@
 const path = require('path');
-// const root = path.resolve(__dirname, '../');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin-from-webpack-contrib');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
+
 module.exports = {
+  mode: process.env.NODE_ENV === 'production' ? 'production': 'development',
+  performance: {
+    maxEntrypointSize: 4000000,
+    maxAssetSize: 1000000
+  },
   entry: {
     app: [
       './src/App.js',
@@ -12,22 +17,26 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    publicPath:  process.env.NODE_ENV === 'production' ? './' : '/',  //prod ./ et dev /
+    publicPath:  process.env.NODE_ENV === 'production' ? './' : '/',  // production ./ or development /
     filename: 'bundle.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        loaders: [ 'style', 'css', 'sass-loader' ]
+        loaders: [ 'style-loader', 'css-loader', 'sass-loader' ],
+        alias: {
+          styles: path.join(__dirname, 'src/style') 
+        }
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: "babel-loader",
         query: {
-          presets: ["@babel/preset-env"]
+          presets: ["@babel/preset-env"],
+          plugins: ["@babel/plugin-proposal-class-properties"]
         }
       },
       {
@@ -45,7 +54,7 @@ module.exports = {
       },
       {
         test: /\.json$/,
-        loader: 'json',
+        loader: 'json-loader',
         query: {
           name: 'assets/[name].[hash:7].[ext]'
         }
