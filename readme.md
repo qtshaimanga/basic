@@ -15,3 +15,9 @@ npm run build
 npm run doc
 ```
 
+### USE
+
+- use dataset.json and import data in ./assets/data.js or fetch data API
+- use ./workers/serviceWorker.js identified in ./config/index
+- create components
+- use flux to store some events

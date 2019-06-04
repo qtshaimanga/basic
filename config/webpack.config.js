@@ -25,10 +25,16 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        loaders: [ 'style-loader', 'css-loader', 'sass-loader' ],
-        alias: {
-          styles: path.join(__dirname, 'src/style') 
-        }
+        use: [{
+            loader: "style-loader"
+          }, {
+            loader: "css-loader"
+          }, {
+            loader: "sass-loader",
+            options: {
+                includePaths: ["./src/style"]
+            }
+        }]
       },
       {
         test: /\.js$/,

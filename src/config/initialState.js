@@ -1,13 +1,15 @@
-import dom from 'dom-hand'
-import Actions from './../flux/actions'
+import dom from 'dom-hand';
+import Actions from './../flux/actions';
+import Config from './index';
 
 
 class InitialState {
 
   constructor(){
 
-    this.bind()
-    this.addListeners()
+    this.bind();
+    this.addServiceWorker();
+    this.addListeners();
 
   }
 
@@ -15,6 +17,25 @@ class InitialState {
 
     [ 'onWindowResize', 'onMouseMove', 'onMouseUp', 'onMouseDown', 'onWindowBlur', 'onWindowFocus' ]
       .forEach( ( fn ) => this[ fn ] = this[ fn ].bind( this ) )
+
+  }
+
+  addServiceWorker() {
+
+    if ('serviceWorker' in window.navigator) {
+      window.navigator.serviceWorker
+        .register(Config.registration.ServiceWorker)
+        .then(reg => {
+            console.log('service worker running', reg);
+            return reg;
+        })
+        .catch(err => {
+            console.log('service worker failed', err);
+            throw err;
+        }); 
+    } else {
+      console.log('Your browser do not support Service Worker')
+    }
 
   }
 
