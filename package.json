@@ -32,7 +32,7 @@
     "dom-hand": "^1.0.2",
     "eventemitter2": "^5.0.1",
     "flux": "^3.1.2",
-    "gsap": "^1.19.1",
+    "gsap": "^3.6.0",
     "json-loader": "^0.5.4",
     "jsoneditor": "^5.32.5",
     "lodash.bindall": "^4.4.0",
